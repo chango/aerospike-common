@@ -115,7 +115,7 @@ typedef struct as_stream_hooks_s {
  *
  *	@relatesalso as_stream
  */
-inline as_stream * as_stream_init(as_stream * stream, void * data, const as_stream_hooks * hooks) 
+static inline as_stream * as_stream_init(as_stream * stream, void * data, const as_stream_hooks * hooks) 
 {
 	if ( !stream ) return stream;
 
@@ -135,7 +135,7 @@ inline as_stream * as_stream_init(as_stream * stream, void * data, const as_stre
  *
  *	@relatesalso as_stream
  */
-inline as_stream * as_stream_new(void * data, const as_stream_hooks * hooks)
+static inline as_stream * as_stream_new(void * data, const as_stream_hooks * hooks)
 {
 	as_stream * stream = (as_stream *) malloc(sizeof(as_stream));
 	if ( !stream ) return stream;
@@ -155,7 +155,7 @@ inline as_stream * as_stream_new(void * data, const as_stream_hooks * hooks)
  *
  *	@relatesalso as_stream
  */
-inline void as_stream_destroy(as_stream * stream)
+static inline void as_stream_destroy(as_stream * stream)
 {
 	as_util_hook(destroy, 1, stream);
 	if ( stream && stream->free ) {
@@ -176,7 +176,7 @@ inline void as_stream_destroy(as_stream * stream)
  *
  *	@relatesalso as_stream
  */
-inline void * as_stream_source(const as_stream * stream)
+static inline void * as_stream_source(const as_stream * stream)
 {
 	return (stream ? stream->data : NULL);
 }
@@ -190,7 +190,7 @@ inline void * as_stream_source(const as_stream * stream)
  *
  *	@relatesalso as_stream
  */
-inline as_val * as_stream_read(const as_stream * stream)
+static inline as_val * as_stream_read(const as_stream * stream)
 {
 	return as_util_hook(read, NULL, stream);
 }
@@ -204,7 +204,7 @@ inline as_val * as_stream_read(const as_stream * stream)
  *
  *	@relatesalso as_stream
  */
-inline bool as_stream_readable(const as_stream * stream)
+static inline bool as_stream_readable(const as_stream * stream)
 {
 	return stream != NULL && stream->hooks != NULL && stream->hooks->read;
 }
@@ -219,7 +219,7 @@ inline bool as_stream_readable(const as_stream * stream)
  *
  *	@relatesalso as_stream
  */
-inline as_stream_status as_stream_write(const as_stream * stream, as_val * value)
+static inline as_stream_status as_stream_write(const as_stream * stream, as_val * value)
 {
 	return as_util_hook(write, AS_STREAM_ERR, stream, value);
 }
@@ -234,7 +234,7 @@ inline as_stream_status as_stream_write(const as_stream * stream, as_val * value
  *
  *	@relatesalso as_stream
  */
-inline bool as_stream_writable(const as_stream * stream)
+static inline bool as_stream_writable(const as_stream * stream)
 {
 	return stream != NULL && stream->hooks != NULL && stream->hooks->write;
 }
